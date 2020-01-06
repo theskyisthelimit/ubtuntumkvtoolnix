@@ -1,7 +1,5 @@
 #!/bin/bash
-echo $1
-cd "$1"
-for file in *.mkv;
+for file in "$1"
 do
   subs=$(mkvmerge -I "$file" | sed -ne '/^Track ID [0-9]*: subtitles (SubRip\/SRT).* language:[(eng)|(ger)|(jpn)].*/ { s/^[^0-9]*\([0-9]*\):.*/\1/;H }; $ { g;s/[^0-9]/,/g;s/^,//;p }')
   audio=$(mkvmerge -I "$file" | sed -ne '/^Track ID [0-9]*: audio.* language:[(eng)|(ger)|(jpn)].*/ { s/^[^0-9]*\([0-9]*\):.*/\1/;H }; $ { g;s/[^0-9]/,/g;s/^,//;p }')
