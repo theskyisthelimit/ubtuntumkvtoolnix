@@ -27,6 +27,7 @@ do
       else
         mkvmerge $subs $audio -o "${file%.mkv}".edited.mkv "$file";
         mv "${file%.mkv}".edited.mkv "$file"
+        echo "PGS/ASS/VobSub Subtitles found and removed!"
         # mv "$1" /media/Trash/;
       fi
     else
@@ -36,7 +37,7 @@ do
 
       mkvmerge $subs $audio -o "${file%.mkv}".edited.mkv "$file";
       mv "${file%.mkv}".edited.mkv "$file"
-      echo "Multiplexing took place. Exiting now."
+      echo "No harmful Subtitles found. Multiplexed file"
       # mv "$1" /media/Trash/;
     fi
 done
