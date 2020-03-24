@@ -4,6 +4,7 @@ mkv () {
   then
    echo "Starting conversion for $1"
    file=$(echo "$1")
+   mkvmerge -I "$file"
    audio=$(mkvmerge -I "$file" | sed -ne '/^Track ID [0-9]*: audio .* language:\(ger\|eng\|jpn\|und\).*/ { s/^[^0-9]*\([0-9]*\):.*/\1/;H }; $ { g;s/[^0-9]/,/g;s/^,//;p }')
    audiocount=$(echo $audio | tr "," "\n" | wc -l)
    echo "1: found $audio ($audiocount) to keep"
