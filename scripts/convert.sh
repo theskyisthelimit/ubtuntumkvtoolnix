@@ -28,7 +28,18 @@ mkv () {
 
        if [ -z "$subs" ]
        then
-         echo "6: Nothing found to remove. Will exit script now."
+         if [ $diffaudio -gt 0 ]
+		then
+			echo "6: Only needed audio found."
+			subs="-S";
+			audio="-a $audio";
+			mkvmerge $subs $audio -o "${file%.mkv}".edited.mkv "$file";
+			mv "${file%.mkv}".edited.mkv "$file"
+			echo "7: Unwanted audio found and removed!"
+			# mv "$1" /media/Trash/;
+		else
+			echo "6: Nothing found to remove. Will exit script now."
+		fi
 
        else
          subs="-S";
